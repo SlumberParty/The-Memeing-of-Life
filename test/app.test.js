@@ -46,16 +46,14 @@ describe('app routes', () => {
   });
 
   it('gets a habit by id', async() => {
-    const meme = await Meme.create({ top: 'ahhhh' });
+    const meme = await Meme.create({ image: 'image' });
 
     return request(app)
       .get(`/api/v1/memes/${meme._id}`)
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          top: 'I live, I die',
-          image: './assets/philosoraptor.jpg',
-          bottom: 'I live again',
+          image: 'image',
           __v: 0
         });
       });
