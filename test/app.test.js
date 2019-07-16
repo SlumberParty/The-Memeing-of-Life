@@ -44,4 +44,20 @@ describe('app routes', () => {
         expect(res.body).toEqual([memeJSON]);
       });
   });
+
+  it('gets a habit by id', async() => {
+    const meme = await Meme.create({ top: 'ahhhh' });
+
+    return request(app)
+      .get(`/api/v1/memes/${meme._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          top: 'I live, I die',
+          image: './assets/philosoraptor.jpg',
+          bottom: 'I live again',
+          __v: 0
+        });
+      });
+  });
 });
