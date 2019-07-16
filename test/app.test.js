@@ -1,11 +1,36 @@
 require('dotenv').config();
-require('./lib/utils/connect')();
 
-const app = require('./lib/app');
+const request = require('supertest');
+const app = require('../lib/app');
+const connect = require('../lib/utils/connect');
+const mongoose = require('mongoose');
+const Meme = require('../lib/models/Meme');
 
-const PORT = process.env.PORT || 7890;
+describe('app routes', () => {
+  beforeAll(() => {
+    connect();
+  });
+});
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log('Started on ${PORT}');
+beforeEach(() => {
+  return mongoose.connection.dropDatabase();
+});
+
+afterAll(() => {
+  return mongoose.connection.close();
+});
+
+it('creates a new meme', () => {
+  return request(app)
+    .post('/api/v1/memes')
+    .send({ top: 'I live, I die', image: './assets/philosoraptor.jpg', bottom: 'I live again' })
+    .then(res => {
+      expect(res.body).toEqual({
+        _id: expect.any(String),
+        top: 'I live, I die',
+        image: './assets/philosoraptor.jpg',
+        bottom: 'I live again',
+        __v: 0
+      });
+    });
 });
