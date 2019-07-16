@@ -4,7 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
-// const Meme = require('../lib/models/Meme');
+const Meme = require('../lib/models/Meme');
 
 describe('app routes', () => {
   beforeAll(() => {
@@ -31,6 +31,17 @@ describe('app routes', () => {
           bottom: 'I live again',
           __v: 0
         });
+      });
+  });
+
+  it('gets a list of all habits', async() => {
+    const meme = await Meme.create({ image: 'image' });
+
+    return request(app)
+      .get('/api/v1/memes')
+      .then(res => {
+        const memeJSON = JSON.parse(JSON.stringify(meme));
+        expect(res.body).toEqual([memeJSON]);
       });
   });
 });
