@@ -58,4 +58,15 @@ describe('app routes', () => {
         });
       });
   });
+
+  it('can update the image of a meme', async() => {
+    const meme = await Meme.create({ image: 'image' });
+
+    return request(app)
+      .patch(`/api/v1/memes/${meme._id}`)
+      .send({ top: 'ahhhh' })
+      .then(res => {
+        expect(res.body.top).toEqual("ahhhh");
+      });
+  });
 });
