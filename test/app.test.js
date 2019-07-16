@@ -69,4 +69,14 @@ describe('app routes', () => {
         expect(res.body.top).toEqual("ahhhh");
       });
   });
+
+  it('deletes a meme', async() => {
+    const meme = await Meme.create({ image: 'image' });
+
+    return request(app)
+      .delete(`/api/v1/memes/${meme._id}`)
+      .then(res => {
+        expect(res.body.image).toEqual('image');
+      });
+  });
 });
