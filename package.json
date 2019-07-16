@@ -1,0 +1,38 @@
+{
+  "name": "The-Memeing-of-Life",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --verbose --runInBand",
+    "test:watch": "npm run test -- --watch",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SlumberParty/The-Memeing-of-Life.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SlumberParty/The-Memeing-of-Life/issues"
+  },
+  "homepage": "https://github.com/SlumberParty/The-Memeing-of-Life#readme",
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.4"
+  }
+}
