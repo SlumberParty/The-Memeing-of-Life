@@ -66,7 +66,7 @@ describe('app routes', () => {
       .patch(`/api/v1/memes/${meme._id}`)
       .send({ top: 'ahhhh' })
       .then(res => {
-        expect(res.body.top).toEqual("ahhhh");
+        expect(res.body.top).toEqual('ahhhh');
       });
   });
 
